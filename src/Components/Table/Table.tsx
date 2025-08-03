@@ -5,19 +5,18 @@ import Row from "./Row/Row";
 interface ITableProps {
 	/** Table Rows */
 	rows: IRow[];
+	/** Header Row */
+	headerRow?: IRow;
 }
 
-const Table: React.FC<ITableProps> = ({ rows }) => {
-	const headerRows = rows.filter((row) => row.isHeader);
+const Table: React.FC<ITableProps> = ({ rows, headerRow }) => {
 	const bodyRows = rows.filter((row) => !row.isHeader);
 
 	return (
 		<table className="data-table">
-			{headerRows.length > 0 && (
+			{headerRow && (
 				<thead>
-					{headerRows.map((row, index) => (
-						<Row key={`header-${index}`} {...row} />
-					))}
+					<Row key={`header-${headerRow.rowId}`} {...headerRow} />
 				</thead>
 			)}
 			<tbody>

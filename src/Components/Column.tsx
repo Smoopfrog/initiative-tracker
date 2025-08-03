@@ -3,10 +3,14 @@ import React, { useState } from "react";
 export interface IColumn {
 	/** Column name */
 	name: string;
-	/** Column value */
-	value: string;
+	/** Column header name */
+	headerName: string;
 	/** Is editable */
 	isEditable?: boolean;
+	/** Column type */
+	type?: "text" | "number";
+	/** Column value */
+	value: string | number | null;
 }
 
 interface IColumnProps extends IColumn {
@@ -15,10 +19,11 @@ interface IColumnProps extends IColumn {
 }
 
 const Column: React.FC<IColumnProps> = ({
+	rowId,
 	name,
 	value,
+	type,
 	isEditable = false,
-	rowId,
 }) => {
 	const [inputValue, setInputValue] = useState(value);
 
@@ -31,8 +36,8 @@ const Column: React.FC<IColumnProps> = ({
 			{isEditable ? (
 				<input
 					id={`${rowId}-${name}`}
-					type="text"
-					value={inputValue}
+					type={type}
+					value={inputValue || undefined}
 					className="column-input"
 					onChange={(e) => handleChange(e.target.value)}
 				/>
