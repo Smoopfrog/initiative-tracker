@@ -1,5 +1,5 @@
 import React from "react";
-import Column, { type IColumn } from "../../Column";
+import Column, { type IColumn } from "../Column.tsx/Column";
 
 export interface IRow {
 	/** Row id */

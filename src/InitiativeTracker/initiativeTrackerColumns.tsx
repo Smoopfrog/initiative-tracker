@@ -1,11 +1,11 @@
-import type { IColumn } from "../Components/Column";
+import type { IColumn } from "../Components/Table/Column.tsx/Column";
+import ConditionsRenderer from "./ConditionsRenderer";
 
 export const initiativeTrackerColumns: IColumn[] = [
 	{
 		name: "initiative",
 		headerName: "Initiave",
 		isEditable: true,
-		type: "number",
 		value: null,
 	},
 	{
@@ -18,14 +18,19 @@ export const initiativeTrackerColumns: IColumn[] = [
 		name: "hp",
 		headerName: "HP",
 		isEditable: true,
-		type: "number",
 		value: null,
 	},
 	{
 		name: "ac",
 		headerName: "AC",
 		isEditable: true,
-		type: "number",
 		value: null,
+	},
+	{
+		name: "conditions",
+		headerName: "Conditions",
+		isEditable: false,
+		value: null,
+		columnRenderer: ConditionsRenderer,
 	},
 ];
