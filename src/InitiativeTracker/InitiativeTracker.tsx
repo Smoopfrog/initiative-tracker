@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../Components/Table/Table";
 import { initiativeTrackerColumns } from "./initiativeTrackerColumns";
 import type { IRow } from "../Components/Table/Row/Row";
+import ConditionsRendererWrapper from "./ConditionsRendererWrapper";
 
 interface ICharacter {
 	id: string;
@@ -9,15 +10,17 @@ interface ICharacter {
 	name: string;
 	hp: number;
 	ac: number;
+	conditions?: string[];
 }
 
-const characters: ICharacter[] = [
+const initialCharacters: ICharacter[] = [
 	{
 		id: "1",
 		initiative: 10,
 		name: "John Doe",
 		hp: 10,
 		ac: 10,
+		conditions: ["Poisoned", "Prone"],
 	},
 	{
 		id: "2",
@@ -25,6 +28,7 @@ const characters: ICharacter[] = [
 		name: "Jane Doe",
 		hp: 10,
 		ac: 10,
+		conditions: ["Blinded"],
 	},
 	{
 		id: "3",
@@ -32,6 +36,7 @@ const characters: ICharacter[] = [
 		name: "Alex Doe",
 		hp: 10,
 		ac: 10,
+		conditions: [],
 	},
 	{
 		id: "4",
@@ -39,6 +44,7 @@ const characters: ICharacter[] = [
 		name: "Alexandra Doe",
 		hp: 10,
 		ac: 10,
+		conditions: ["Frightened", "Grappled"],
 	},
 	{
 		id: "5",
@@ -46,16 +52,43 @@ const characters: ICharacter[] = [
 		name: "Alexandra Doe",
 		hp: 10,
 		ac: 10,
+		conditions: [],
 	},
 ];
 
 const InitiativeTracker: React.FC = () => {
+	const [characters, setCharacters] = useState<ICharacter[]>(initialCharacters);
+
+	const handleConditionsUpdate = (rowId: string, newConditions: string[]) => {
+		setCharacters((prev) =>
+			prev.map((char) =>
+				char.id === rowId ? { ...char, conditions: newConditions } : char
+			)
+		);
+	};
+
 	const rows: IRow[] = characters.map((character) => ({
 		rowId: character.id,
-		columns: initiativeTrackerColumns.map((column) => ({
-			...column,
-			value: character[column.name as keyof ICharacter] || null,
-		})),
+		columns: initiativeTrackerColumns.map((column) => {
+			const columnConfig = {
+				...column,
+				value: character[column.name as keyof ICharacter] || null,
+			};
+
+			// Pass the update function to the conditions column
+			if (column.name === "conditions") {
+				columnConfig.columnRenderer = (
+					props: import("../Components/Table/Column.tsx/Column").IColumnProps
+				) => (
+					<ConditionsRendererWrapper
+						{...props}
+						onConditionsUpdate={handleConditionsUpdate}
+					/>
+				);
+			}
+
+			return columnConfig;
+		}),
 	}));
 
 	const headerRow: IRow = {
@@ -64,6 +97,7 @@ const InitiativeTracker: React.FC = () => {
 			...column,
 			value: column.headerName,
 			isEditable: false,
+			columnRenderer: undefined,
 		})),
 		isHeader: true,
 	};
