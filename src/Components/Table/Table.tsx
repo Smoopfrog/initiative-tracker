@@ -10,7 +10,7 @@ interface ITableProps {
 const Table: React.FC<ITableProps> = ({ rows }) => {
 	const headerRows = rows.filter((row) => row.isHeader);
 	const bodyRows = rows.filter((row) => !row.isHeader);
-	const test = true;
+
 	return (
 		<table className="data-table">
 			{headerRows.length > 0 && (
