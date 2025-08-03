@@ -1,10 +1,10 @@
 import React from "react";
-import type { IRowProps } from "./Row/Row";
+import type { IRow } from "./Row/Row";
 import Row from "./Row/Row";
 
 interface ITableProps {
 	/** Table Rows */
-	rows: IRowProps[];
+	rows: IRow[];
 }
 
 const Table: React.FC<ITableProps> = ({ rows }) => {

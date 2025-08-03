@@ -1,9 +1,10 @@
 import "./App.css";
-import type { IRowProps } from "./Components/Table/Row/Row";
 import Table from "./Components/Table/Table";
+import type { IRow } from "./Components/Table/Row/Row";
 
-const rows: IRowProps[] = [
+const rows: IRow[] = [
 	{
+		rowId: "header",
 		columns: [
 			{ name: "Initiave", value: "Initiave" },
 			{ name: "Name", value: "Name" },
@@ -13,6 +14,7 @@ const rows: IRowProps[] = [
 		isHeader: true,
 	},
 	{
+		rowId: "1",
 		columns: [
 			{ name: "1", value: "1" },
 			{ name: "John Doe", value: "John Doe" },
@@ -21,6 +23,7 @@ const rows: IRowProps[] = [
 		],
 	},
 	{
+		rowId: "2",
 		columns: [
 			{ name: "2", value: "2" },
 			{ name: "Jane Doe", value: "Jane Doe" },
@@ -29,6 +32,7 @@ const rows: IRowProps[] = [
 		],
 	},
 	{
+		rowId: "3",
 		columns: [
 			{ name: "3", value: "3" },
 			{ name: "Alex Doe", value: "Alex Doe" },
@@ -37,6 +41,7 @@ const rows: IRowProps[] = [
 		],
 	},
 	{
+		rowId: "4",
 		columns: [
 			{ name: "4", value: "4", isEditable: true },
 			{ name: "Alexandra Doe", value: "Alexandra Doe", isEditable: true },
