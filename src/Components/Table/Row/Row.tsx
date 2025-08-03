@@ -1,11 +1,5 @@
 import React from "react";
-
-interface IColumn {
-	/** Column name */
-	name: string;
-	/** Column value */
-	value: string;
-}
+import Column, { type IColumn } from "../../Column";
 
 export interface IRowProps {
 	/** Columns */
@@ -17,9 +11,13 @@ export interface IRowProps {
 const Row: React.FC<IRowProps> = ({ columns, isHeader = false }) => {
 	const rowContent = columns.map((column) =>
 		isHeader ? (
-			<th key={column.name}>{column.value}</th>
+			<th key={column.name}>
+				<Column {...column} />
+			</th>
 		) : (
-			<td key={column.name}>{column.value}</td>
+			<td key={column.name}>
+				<Column {...column} />
+			</td>
 		)
 	);
 

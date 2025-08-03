@@ -1,7 +1,8 @@
 import "./App.css";
+import type { IRowProps } from "./Components/Table/Row/Row";
 import Table from "./Components/Table/Table";
 
-const rows = [
+const rows: IRowProps[] = [
 	{
 		columns: [
 			{ name: "Initiave", value: "Initiave" },
@@ -37,10 +38,10 @@ const rows = [
 	},
 	{
 		columns: [
-			{ name: "4", value: "4" },
-			{ name: "Alexandra Doe", value: "Alexandra Doe" },
-			{ name: "14", value: "14" },
-			{ name: "16", value: "16" },
+			{ name: "4", value: "4", isEditable: true },
+			{ name: "Alexandra Doe", value: "Alexandra Doe", isEditable: true },
+			{ name: "14", value: "14", isEditable: true },
+			{ name: "16", value: "16", isEditable: true },
 		],
 	},
 ];
