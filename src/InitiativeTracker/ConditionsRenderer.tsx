@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ConditionsModal from "./ConditionsModal";
+import { dndConditions } from "../Constants/Conditions";
+import { conditionIcons } from "../Constants/ConditionIcons";
 
-// Example custom renderer for conditions
 const ConditionsRenderer: React.FC<{
 	rowId: string;
 	name: string;
@@ -24,6 +25,16 @@ const ConditionsRenderer: React.FC<{
 		}
 	};
 
+	// Helper function to get condition data and icon component
+	const getCondition = (conditionName: string) => {
+		const condition = dndConditions.find((c) => c.name === conditionName);
+		if (condition) {
+			const IconComponent = conditionIcons[condition.icon];
+			return { ...condition, IconComponent };
+		}
+		return null;
+	};
+
 	return (
 		<>
 			<div className="conditions-container">
@@ -35,11 +46,22 @@ const ConditionsRenderer: React.FC<{
 					+
 				</button>
 				<div className="selected-conditions">
-					{conditions.map((condition, index) => (
-						<span key={index} className="condition-badge">
-							{condition}
-						</span>
-					))}
+					{conditions.map((condition, index) => {
+						const conditionData = getCondition(condition);
+
+						const conditionTitle = `${conditionData?.name}\u00A0${conditionData?.description}`;
+						return (
+							<span
+								key={index}
+								className="condition-badge"
+								title={conditionTitle}
+							>
+								{conditionData?.IconComponent && (
+									<conditionData.IconComponent />
+								)}
+							</span>
+						);
+					})}
 				</div>
 			</div>
 			<ConditionsModal

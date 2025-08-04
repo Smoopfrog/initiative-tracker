@@ -163,6 +163,18 @@
 	font-size: 0.75rem;
 	font-weight: 500;
 	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.5rem;
+	height: 1.5rem;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.condition-badge:hover {
+	transform: scale(1.1);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .no-conditions {
@@ -182,6 +194,15 @@
 
 .edit-conditions-button:hover {
 	background-color: #f1f5f9;
+}
+
+/* Condition Icon Styles */
+.condition-icon {
+	display: inline-block;
+	margin-right: 0.5rem;
+	font-size: 1.2em;
+	color: #667eea;
+	font-weight: bold;
 }
 
 /* Modal Styles */
