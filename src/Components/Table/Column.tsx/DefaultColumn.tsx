@@ -1,4 +1,3 @@
-import React from "react";
 import type { IColumnProps } from "./Column";
 
 interface IDefaultColumnProps<T extends { id: string }>

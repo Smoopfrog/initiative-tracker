@@ -1,4 +1,3 @@
-import React from "react";
 import type { IRow } from "./Row/Row";
 import Row from "./Row/Row";
 
