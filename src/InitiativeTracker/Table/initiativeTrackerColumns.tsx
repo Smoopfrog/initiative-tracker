@@ -1,7 +1,8 @@
 import type { IColumn } from "../../Components/Table/Column.tsx/Column";
+import type { ICharacter } from "../../Types/Character";
 import ConditionsRenderer from "../Conditions/ConditionsRenderer";
 
-export const initiativeTrackerColumns: IColumn[] = [
+export const initiativeTrackerColumns: IColumn<ICharacter>[] = [
 	{
 		name: "initiative",
 		headerName: "Initiave",

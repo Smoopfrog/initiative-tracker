@@ -1,7 +1,7 @@
-import React from "react";
+import React, { type Dispatch } from "react";
 import DefaultColumn from "./DefaultColumn";
 
-export interface IColumn {
+export interface IColumn<T extends { id: string }> {
 	/** Column name */
 	name: string;
 	/** Column header name */
@@ -11,19 +11,21 @@ export interface IColumn {
 	/** Column value */
 	value: string | number | string[] | number[] | null;
 	/** Custom column renderer component */
-	columnRenderer?: React.ComponentType<IColumnProps>;
+	columnRenderer?: React.ComponentType<IColumnProps<T>>;
 }
 
-export interface IColumnProps extends IColumn {
+export interface IColumnProps<T extends { id: string }> extends IColumn<T> {
 	/** Row id */
 	rowId: string;
+	/** Set rows */
+	setData: Dispatch<React.SetStateAction<T[]>>;
 }
 
-const Column: React.FC<IColumnProps> = ({
+const Column = <T extends { id: string }>({
 	value,
 	columnRenderer,
 	...props
-}) => {
+}: IColumnProps<T>) => {
 	// If a custom renderer is provided, use it
 	if (columnRenderer) {
 		const CustomRenderer = columnRenderer;

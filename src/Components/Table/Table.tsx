@@ -2,14 +2,17 @@ import React from "react";
 import type { IRow } from "./Row/Row";
 import Row from "./Row/Row";
 
-interface ITableProps {
+interface ITableProps<T extends { id: string }> {
 	/** Table Rows */
-	rows: IRow[];
+	rows: IRow<T>[];
 	/** Header Row */
-	headerRow?: IRow;
+	headerRow?: IRow<T>;
 }
 
-const Table: React.FC<ITableProps> = ({ rows, headerRow }) => {
+const Table = <T extends { id: string }>({
+	rows,
+	headerRow,
+}: ITableProps<T>) => {
 	const bodyRows = rows.filter((row) => !row.isHeader);
 
 	return (

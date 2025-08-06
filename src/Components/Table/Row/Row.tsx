@@ -1,34 +1,47 @@
-import React from "react";
+import React, { type Dispatch } from "react";
 import Column, { type IColumn } from "../Column.tsx/Column";
 
-export interface IRow {
+export interface IRow<T extends { id: string }> {
 	/** Row id */
 	rowId: string;
 	/** Columns */
-	columns: IColumn[];
+	columns: IColumn<T>[];
 	/** Is header */
 	isHeader?: boolean;
 	/** Optional className for styling */
 	className?: string;
 	/** Optional click handler */
 	onClick?: () => void;
+	/** Set rows */
+	setData: Dispatch<React.SetStateAction<T[]>>;
 }
 
-const Row: React.FC<IRow> = ({
+const Row = <T extends { id: string }>({
 	columns,
 	isHeader = false,
 	rowId,
 	className,
 	onClick,
-}) => {
+	setData,
+}: IRow<T>) => {
 	const rowContent = columns.map((column) =>
 		isHeader ? (
 			<th key={column.name}>
-				<Column key={`${column.name}-${rowId}`} {...column} rowId={rowId} />
+				<Column<T>
+					key={`${column.name}-${rowId}`}
+					{...column}
+					rowId={rowId}
+					setData={setData}
+				/>
 			</th>
 		) : (
 			<td key={column.name}>
-				<Column key={`${column.name}-${rowId}`} {...column} rowId={rowId} />
+				<Column<T>
+					key={`${column.name}-${rowId}`}
+					{...column}
+					rowId={rowId}
+					setData={setData}
+				/>
 			</td>
 		)
 	);

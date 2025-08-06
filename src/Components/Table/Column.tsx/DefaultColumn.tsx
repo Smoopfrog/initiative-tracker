@@ -1,27 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import type { IColumnProps } from "./Column";
 
-interface IDefaultColumnProps extends IColumnProps {
+interface IDefaultColumnProps<T extends { id: string }>
+	extends IColumnProps<T> {
 	value: string | number | null;
 }
 
-const DefaultColumn: React.FC<IDefaultColumnProps> = ({
+const DefaultColumn = <T extends { id: string }>({
 	rowId,
 	name,
 	value,
 	isEditable = false,
-}) => {
-	const [inputValue, setInputValue] = useState(value);
-
+	setData,
+}: IDefaultColumnProps<T>) => {
 	const handleChange = (value: string | number | null) => {
-		setInputValue(value);
+		setData((prev) =>
+			prev.map((data) =>
+				data.id === rowId ? { ...data, [name]: value } : data
+			)
+		);
 	};
 
 	return isEditable ? (
 		<input
 			id={`${rowId}-${name}`}
 			type="text"
-			value={inputValue || undefined}
+			value={value || undefined}
 			className="column-input"
 			onChange={(e) => handleChange(e.target.value)}
 		/>

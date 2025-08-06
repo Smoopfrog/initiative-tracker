@@ -41,11 +41,12 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 		[setCharacters]
 	);
 
-	const rows: IRow[] = useMemo(
+	const rows: IRow<ICharacter>[] = useMemo(
 		() =>
 			characters.map((character) => ({
 				rowId: character.id,
 				className: character.id === selectedCharacterId ? "selected" : "",
+				setData: setCharacters,
 				columns: initiativeTrackerColumns.map((column) => {
 					const columnConfig = {
 						...column,
@@ -54,7 +55,7 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 
 					// Pass the update function to the conditions column
 					if (column.name === "conditions") {
-						columnConfig.columnRenderer = (props: IColumnProps) => (
+						columnConfig.columnRenderer = (props: IColumnProps<ICharacter>) => (
 							<ConditionsRendererWrapper
 								{...props}
 								onConditionsUpdate={handleConditionsUpdate}
@@ -63,7 +64,7 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 					}
 
 					if (column.name === "delete") {
-						columnConfig.columnRenderer = (props: IColumnProps) => {
+						columnConfig.columnRenderer = (props: IColumnProps<ICharacter>) => {
 							const onClick = () => handleDeleteCharacter(character.id);
 
 							return <DeleteCellRenderer {...props} onClick={onClick} />;
@@ -81,7 +82,7 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 		]
 	);
 
-	const headerRow: IRow = {
+	const headerRow: IRow<ICharacter> = {
 		rowId: "header",
 		columns: initiativeTrackerColumns.map((column) => ({
 			...column,
@@ -90,6 +91,7 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 			columnRenderer: undefined,
 		})),
 		isHeader: true,
+		setData: () => {},
 	};
 
 	return <Table rows={rows} headerRow={headerRow} />;
