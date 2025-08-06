@@ -47,7 +47,7 @@ const InitiativeTrackerMenu: React.FC<IInitiativeTrackerMenuProps> = ({
 		setCharacters((prev) => [
 			...prev,
 			{
-				id: "0",
+				id: `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`,
 				initiative: 0,
 				name: "",
 				ac: 10,

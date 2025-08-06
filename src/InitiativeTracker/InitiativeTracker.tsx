@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import InitiativeTrackerTable from "./Table/InitiativeTrackerTable";
 import InitiativeTrackerMenu from "./InitiativeTrackerMenu";
 import { initialCharacters } from "../Constants/DemoChars";
@@ -13,16 +13,22 @@ const InitiativeTracker: React.FC = () => {
 		characters[0]?.id || ""
 	);
 
+	console.log(characters);
+	const sortedCharacters = useMemo(
+		() => characters.sort((a, b) => a.initiative - b.initiative),
+		[characters]
+	);
+
 	return (
 		<div>
 			<InitiativeTrackerMenu
-				characters={characters}
+				characters={sortedCharacters}
 				setCharacters={setCharacters}
 				selectedCharacterId={selectedCharacterId}
 				setSelectedCharacterId={setSelectedCharacterId}
 			/>
 			<InitiativeTrackerTable
-				characters={characters}
+				characters={sortedCharacters}
 				selectedCharacterId={selectedCharacterId}
 				setCharacters={setCharacters}
 			/>
