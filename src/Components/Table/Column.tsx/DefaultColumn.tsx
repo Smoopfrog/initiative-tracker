@@ -23,10 +23,12 @@ const DefaultColumn = <T extends { id: string }>({
 		);
 	};
 
+	const inputType = typeof value === "number" ? "number" : "text";
+
 	return isEditable ? (
 		<input
 			id={`${rowId}-${name}`}
-			type="text"
+			type={inputType}
 			value={inputValue || undefined}
 			className="column-input"
 			onChange={(e) => setInputValue(e.target.value)}
