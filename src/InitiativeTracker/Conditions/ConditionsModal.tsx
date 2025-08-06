@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { dndConditions } from "../../Constants/Conditions";
 import { conditionIcons } from "../../Constants/ConditionIcons";
 
@@ -17,6 +18,31 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 }) => {
 	const [localSelectedConditions, setLocalSelectedConditions] =
 		useState<string[]>(selectedConditions);
+
+	// Update local state when selectedConditions prop changes
+	useEffect(() => {
+		setLocalSelectedConditions(selectedConditions);
+	}, [selectedConditions]);
+
+	// Handle escape key to close modal
+	useEffect(() => {
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === "Escape" && isOpen) {
+				onClose();
+			}
+		};
+
+		if (isOpen) {
+			document.addEventListener("keydown", handleEscape);
+			// Prevent body scroll when modal is open
+			document.body.style.overflow = "hidden";
+		}
+
+		return () => {
+			document.removeEventListener("keydown", handleEscape);
+			document.body.style.overflow = "unset";
+		};
+	}, [isOpen, onClose]);
 
 	const handleConditionToggle = (conditionName: string) => {
 		setLocalSelectedConditions((prev) =>
@@ -38,7 +64,7 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 
 	if (!isOpen) return null;
 
-	return (
+	const modalContent = (
 		<div className="modal-overlay" onClick={onClose}>
 			<div className="modal-content" onClick={(e) => e.stopPropagation()}>
 				<div className="modal-header">
@@ -108,6 +134,9 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 			</div>
 		</div>
 	);
+
+	// Use createPortal to render the modal outside of the table structure
+	return createPortal(modalContent, document.body);
 };
 
 export default ConditionsModal;
