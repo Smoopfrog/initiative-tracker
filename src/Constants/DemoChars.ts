@@ -36,7 +36,7 @@ export const initialCharacters: ICharacter[] = [
 	{
 		id: "5",
 		initiative: 50,
-		name: "Alexandra Doe",
+		name: "Bobobobo",
 		hp: 10,
 		ac: 10,
 		conditions: [],

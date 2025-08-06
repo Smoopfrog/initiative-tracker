@@ -1,14 +1,16 @@
-import React from "react";
+import React, { type Dispatch } from "react";
 import type { ICharacter } from "../Types/Character";
 
 interface IInitiativeTrackerMenuProps {
 	characters: ICharacter[];
 	selectedCharacterId: string | null;
 	setSelectedCharacterId: (charId: string) => void;
+	setCharacters: Dispatch<React.SetStateAction<ICharacter[]>>;
 }
 
 const InitiativeTrackerMenu: React.FC<IInitiativeTrackerMenuProps> = ({
 	characters,
+	setCharacters,
 	selectedCharacterId,
 	setSelectedCharacterId,
 }) => {
@@ -41,9 +43,28 @@ const InitiativeTrackerMenu: React.FC<IInitiativeTrackerMenuProps> = ({
 		}
 	};
 
+	const addCharacter = () => {
+		setCharacters((prev) => [
+			...prev,
+			{
+				id: "0",
+				initiative: 0,
+				name: "",
+				ac: 10,
+				hp: 10,
+			},
+		]);
+	};
+
 	return (
 		<div>
-			<button>+</button>
+			<button
+				onClick={() => {
+					addCharacter();
+				}}
+			>
+				+
+			</button>
 			<button
 				onClick={() => {
 					onNavigation("previous");

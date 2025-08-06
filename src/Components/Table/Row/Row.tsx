@@ -14,11 +14,11 @@ const Row: React.FC<IRow> = ({ columns, isHeader = false, rowId }) => {
 	const rowContent = columns.map((column) =>
 		isHeader ? (
 			<th key={column.name}>
-				<Column {...column} rowId={rowId} />
+				<Column key={`${column.name}-${rowId}`} {...column} rowId={rowId} />
 			</th>
 		) : (
 			<td key={column.name}>
-				<Column {...column} rowId={rowId} />
+				<Column key={`${column.name}-${rowId}`} {...column} rowId={rowId} />
 			</td>
 		)
 	);

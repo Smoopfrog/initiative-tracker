@@ -33,4 +33,9 @@ export const initiativeTrackerColumns: IColumn[] = [
 		value: null,
 		columnRenderer: ConditionsRenderer,
 	},
+	{
+		name: "delete",
+		headerName: "Delete",
+		value: null,
+	},
 ];

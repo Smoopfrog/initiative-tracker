@@ -20,8 +20,8 @@ const Table: React.FC<ITableProps> = ({ rows, headerRow }) => {
 				</thead>
 			)}
 			<tbody>
-				{bodyRows.map((row, index) => (
-					<Row key={`body-${index}`} {...row} />
+				{bodyRows.map((row) => (
+					<Row key={`body-${row.rowId}`} {...row} />
 				))}
 			</tbody>
 		</table>

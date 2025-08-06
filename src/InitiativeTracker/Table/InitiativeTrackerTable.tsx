@@ -1,53 +1,77 @@
-import React, { useState } from "react";
+import React, { useMemo, useCallback, type Dispatch } from "react";
 import Table from "../../Components/Table/Table";
 import { initiativeTrackerColumns } from "./initiativeTrackerColumns";
-import type { IRow } from "../../Components/Table/Row/Row";
 import ConditionsRendererWrapper from "../Conditions/ConditionsRendererWrapper";
+import DeleteCellRenderer from "../DeleteCellRenderer";
+import type { IRow } from "../../Components/Table/Row/Row";
 import type { ICharacter } from "../../Types/Character";
+import type { IColumnProps } from "../../Components/Table/Column.tsx/Column";
 
 interface IInitiativeTrackerTableProps {
 	/** Initial characters to display in the table */
-	initialCharacters?: ICharacter[];
+	characters: ICharacter[];
+	setCharacters: Dispatch<React.SetStateAction<ICharacter[]>>;
 }
 
 const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
-	initialCharacters,
+	characters,
+	setCharacters,
 }) => {
-	const [characters, setCharacters] = useState<ICharacter[]>(
-		initialCharacters || []
+	const handleConditionsUpdate = useCallback(
+		(rowId: string, newConditions: string[]) => {
+			setCharacters((prev) =>
+				prev.map((char) =>
+					char.id === rowId ? { ...char, conditions: newConditions } : char
+				)
+			);
+		},
+		[setCharacters]
 	);
 
-	const handleConditionsUpdate = (rowId: string, newConditions: string[]) => {
-		setCharacters((prev) =>
-			prev.map((char) =>
-				char.id === rowId ? { ...char, conditions: newConditions } : char
-			)
-		);
-	};
+	const handleDeleteCharacter = useCallback(
+		(characterId: string) => {
+			setCharacters((prev) => {
+				const filteredList = prev.filter((char) => char.id !== characterId);
 
-	const rows: IRow[] = characters.map((character) => ({
-		rowId: character.id,
-		columns: initiativeTrackerColumns.map((column) => {
-			const columnConfig = {
-				...column,
-				value: character[column.name as keyof ICharacter] || null,
-			};
+				return filteredList;
+			});
+		},
+		[setCharacters]
+	);
 
-			// Pass the update function to the conditions column
-			if (column.name === "conditions") {
-				columnConfig.columnRenderer = (
-					props: import("../../Components/Table/Column.tsx/Column").IColumnProps
-				) => (
-					<ConditionsRendererWrapper
-						{...props}
-						onConditionsUpdate={handleConditionsUpdate}
-					/>
-				);
-			}
+	const rows: IRow[] = useMemo(
+		() =>
+			characters.map((character) => ({
+				rowId: character.id,
+				columns: initiativeTrackerColumns.map((column) => {
+					const columnConfig = {
+						...column,
+						value: character[column.name as keyof ICharacter] || null,
+					};
 
-			return columnConfig;
-		}),
-	}));
+					// Pass the update function to the conditions column
+					if (column.name === "conditions") {
+						columnConfig.columnRenderer = (props: IColumnProps) => (
+							<ConditionsRendererWrapper
+								{...props}
+								onConditionsUpdate={handleConditionsUpdate}
+							/>
+						);
+					}
+
+					if (column.name === "delete") {
+						columnConfig.columnRenderer = (props: IColumnProps) => {
+							const onClick = () => handleDeleteCharacter(character.id);
+
+							return <DeleteCellRenderer {...props} onClick={onClick} />;
+						};
+					}
+
+					return columnConfig;
+				}),
+			})),
+		[characters]
+	);
 
 	const headerRow: IRow = {
 		rowId: "header",
