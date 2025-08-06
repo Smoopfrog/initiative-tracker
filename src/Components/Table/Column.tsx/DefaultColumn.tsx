@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { IColumnProps } from "./Column";
 
 interface IDefaultColumnProps<T extends { id: string }>
@@ -12,6 +13,8 @@ const DefaultColumn = <T extends { id: string }>({
 	isEditable = false,
 	setData,
 }: IDefaultColumnProps<T>) => {
+	const [inputValue, setInputValue] = useState(value);
+
 	const handleChange = (value: string | number | null) => {
 		setData((prev) =>
 			prev.map((data) =>
@@ -24,9 +27,15 @@ const DefaultColumn = <T extends { id: string }>({
 		<input
 			id={`${rowId}-${name}`}
 			type="text"
-			value={value || undefined}
+			value={inputValue || undefined}
 			className="column-input"
-			onChange={(e) => handleChange(e.target.value)}
+			onChange={(e) => setInputValue(e.target.value)}
+			onBlur={() => handleChange(inputValue)}
+			onKeyDown={(e) => {
+				if (e.key === "Enter") {
+					e.currentTarget.blur();
+				}
+			}}
 		/>
 	) : (
 		<span className="column-value">{value}</span>
