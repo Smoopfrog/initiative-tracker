@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { dndConditions } from "../Constants/Conditions";
-import { conditionIcons } from "../Constants/ConditionIcons";
+import { dndConditions } from "../../Constants/Conditions";
+import { conditionIcons } from "../../Constants/ConditionIcons";
 
 interface ConditionsModalProps {
 	isOpen: boolean;

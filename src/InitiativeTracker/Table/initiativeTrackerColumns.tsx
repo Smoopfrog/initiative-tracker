@@ -1,5 +1,5 @@
-import type { IColumn } from "../Components/Table/Column.tsx/Column";
-import ConditionsRenderer from "./ConditionsRenderer";
+import type { IColumn } from "../../Components/Table/Column.tsx/Column";
+import ConditionsRenderer from "../Conditions/ConditionsRenderer";
 
 export const initiativeTrackerColumns: IColumn[] = [
 	{

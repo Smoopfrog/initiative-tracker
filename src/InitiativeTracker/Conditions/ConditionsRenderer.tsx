@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ConditionsModal from "./ConditionsModal";
-import { dndConditions } from "../Constants/Conditions";
-import { conditionIcons } from "../Constants/ConditionIcons";
+import { dndConditions } from "../../Constants/Conditions";
+import { conditionIcons } from "../../Constants/ConditionIcons";
 
 const ConditionsRenderer: React.FC<{
 	rowId: string;
