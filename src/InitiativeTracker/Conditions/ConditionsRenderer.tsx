@@ -39,7 +39,7 @@ const ConditionsRenderer: React.FC<{
 		<>
 			<div className="conditions-container">
 				<button
-					className="edit-conditions-button"
+					className="btn btn-primary btn-icon btn-sm"
 					onClick={() => setIsModalOpen(true)}
 					title="Edit conditions"
 				>

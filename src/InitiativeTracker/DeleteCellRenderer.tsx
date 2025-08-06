@@ -5,7 +5,15 @@ interface IDeleteCellRenderer {
 }
 
 const DeleteCellRenderer: React.FC<IDeleteCellRenderer> = ({ onClick }) => {
-	return <button onClick={onClick}>Delete</button>;
+	return (
+		<button
+			className="btn btn-danger btn-sm"
+			onClick={onClick}
+			title="Delete Character"
+		>
+			Delete
+		</button>
+	);
 };
 
 export default DeleteCellRenderer;

@@ -10,6 +10,126 @@
 	width: fit-content;
 }
 
+/* Button Styles */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 8px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	text-decoration: none;
+	min-height: 2.5rem;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn:active {
+	transform: translateY(0);
+}
+
+.btn:focus {
+	outline: 2px solid #667eea;
+	outline-offset: 2px;
+}
+
+/* Primary Button */
+.btn-primary {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
+.btn-primary:hover {
+	background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* Secondary Button */
+.btn-secondary {
+	background: #f8fafc;
+	color: #475569;
+	border: 1px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+	background: #f1f5f9;
+	border-color: #cbd5e1;
+}
+
+/* Danger Button */
+.btn-danger {
+	background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	color: white;
+}
+
+.btn-danger:hover {
+	background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+/* Success Button */
+.btn-success {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	color: white;
+}
+
+.btn-success:hover {
+	background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* Small Button */
+.btn-sm {
+	padding: 0.5rem 1rem;
+	font-size: 0.75rem;
+	min-height: 2rem;
+}
+
+/* Large Button */
+.btn-lg {
+	padding: 1rem 2rem;
+	font-size: 1rem;
+	min-height: 3rem;
+}
+
+/* Icon Button */
+.btn-icon {
+	padding: 0.5rem;
+	min-width: 2.5rem;
+	min-height: 2.5rem;
+	border-radius: 50%;
+}
+
+.btn-icon.btn-sm {
+	min-width: 2rem;
+	min-height: 2rem;
+}
+
+.btn-icon.btn-lg {
+	min-width: 3rem;
+	min-height: 3rem;
+}
+
+/* Disabled Button */
+.btn:disabled,
+.btn.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none !important;
+}
+
+.btn:disabled:hover,
+.btn.disabled:hover {
+	transform: none;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
 /* Column Component Styles */
 .column-container {
 	width: 100%;
@@ -83,10 +203,35 @@
 .data-table tbody tr {
 	transition: all 0.2s ease-in-out;
 	border-bottom: 1px solid #f1f5f9;
+	cursor: pointer;
 }
 
 .data-table tbody tr:last-child {
 	border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+	background-color: #f8fafc;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Selected Row Styles */
+.data-table tbody tr.selected {
+	background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+	border-left: 4px solid #667eea;
+	box-shadow: 0 4px 6px -1px rgba(102, 126, 234, 0.2),
+		0 2px 4px -1px rgba(102, 126, 234, 0.1);
+	transform: translateY(-2px);
+}
+
+.data-table tbody tr.selected:hover {
+	background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+}
+
+.data-table tbody tr.selected td {
+	color: #1e293b;
+	font-weight: 500;
 }
 
 .data-table tbody td {
@@ -100,6 +245,14 @@
 /* Alternating row colors for better readability */
 .data-table tbody tr:nth-child(even) {
 	background-color: #fafbfc;
+}
+
+.data-table tbody tr:nth-child(even).selected {
+	background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+}
+
+.data-table tbody tr:nth-child(even).selected:hover {
+	background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
 }
 
 /* Responsive Design */

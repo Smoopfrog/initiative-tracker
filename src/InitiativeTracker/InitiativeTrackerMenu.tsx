@@ -57,25 +57,40 @@ const InitiativeTrackerMenu: React.FC<IInitiativeTrackerMenuProps> = ({
 	};
 
 	return (
-		<div>
+		<div
+			style={{
+				display: "flex",
+				gap: "1rem",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
 			<button
+				className="btn btn-primary btn-icon"
 				onClick={() => {
 					addCharacter();
 				}}
+				title="Add Character"
 			>
 				+
 			</button>
 			<button
+				className="btn btn-secondary btn-icon"
 				onClick={() => {
 					onNavigation("previous");
 				}}
+				disabled={!selectedCharacterId || characters.length === 0}
+				title="Previous Character"
 			>
 				&lt;
 			</button>
 			<button
+				className="btn btn-secondary btn-icon"
 				onClick={() => {
 					onNavigation("next");
 				}}
+				disabled={!selectedCharacterId || characters.length === 0}
+				title="Next Character"
 			>
 				&gt;
 			</button>

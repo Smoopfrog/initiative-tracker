@@ -43,7 +43,11 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 			<div className="modal-content" onClick={(e) => e.stopPropagation()}>
 				<div className="modal-header">
 					<h2>Select Conditions</h2>
-					<button className="close-button" onClick={onClose}>
+					<button
+						className="btn btn-icon btn-sm"
+						onClick={onClose}
+						style={{ background: "none", color: "white", border: "none" }}
+					>
 						×
 					</button>
 				</div>
@@ -94,10 +98,10 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 				</div>
 
 				<div className="modal-footer">
-					<button className="cancel-button" onClick={handleCancel}>
+					<button className="btn btn-secondary" onClick={handleCancel}>
 						Cancel
 					</button>
-					<button className="save-button" onClick={handleSave}>
+					<button className="btn btn-primary" onClick={handleSave}>
 						Save
 					</button>
 				</div>

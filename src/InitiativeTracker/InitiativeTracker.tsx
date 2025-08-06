@@ -9,8 +9,8 @@ const InitiativeTracker: React.FC = () => {
 		initialCharacters || []
 	);
 
-	const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
-		characters[0]?.id || null
+	const [selectedCharacterId, setSelectedCharacterId] = useState<string>(
+		characters[0]?.id || ""
 	);
 
 	return (
@@ -23,6 +23,7 @@ const InitiativeTracker: React.FC = () => {
 			/>
 			<InitiativeTrackerTable
 				characters={characters}
+				selectedCharacterId={selectedCharacterId}
 				setCharacters={setCharacters}
 			/>
 		</div>

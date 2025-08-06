@@ -10,11 +10,13 @@ import type { IColumnProps } from "../../Components/Table/Column.tsx/Column";
 interface IInitiativeTrackerTableProps {
 	/** Initial characters to display in the table */
 	characters: ICharacter[];
+	selectedCharacterId: string;
 	setCharacters: Dispatch<React.SetStateAction<ICharacter[]>>;
 }
 
 const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 	characters,
+	selectedCharacterId,
 	setCharacters,
 }) => {
 	const handleConditionsUpdate = useCallback(
@@ -43,6 +45,7 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 		() =>
 			characters.map((character) => ({
 				rowId: character.id,
+				className: character.id === selectedCharacterId ? "selected" : "",
 				columns: initiativeTrackerColumns.map((column) => {
 					const columnConfig = {
 						...column,
@@ -70,7 +73,12 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 					return columnConfig;
 				}),
 			})),
-		[characters]
+		[
+			characters,
+			selectedCharacterId,
+			handleConditionsUpdate,
+			handleDeleteCharacter,
+		]
 	);
 
 	const headerRow: IRow = {

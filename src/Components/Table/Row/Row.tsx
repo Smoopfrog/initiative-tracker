@@ -8,9 +8,19 @@ export interface IRow {
 	columns: IColumn[];
 	/** Is header */
 	isHeader?: boolean;
+	/** Optional className for styling */
+	className?: string;
+	/** Optional click handler */
+	onClick?: () => void;
 }
 
-const Row: React.FC<IRow> = ({ columns, isHeader = false, rowId }) => {
+const Row: React.FC<IRow> = ({
+	columns,
+	isHeader = false,
+	rowId,
+	className,
+	onClick,
+}) => {
 	const rowContent = columns.map((column) =>
 		isHeader ? (
 			<th key={column.name}>
@@ -23,7 +33,11 @@ const Row: React.FC<IRow> = ({ columns, isHeader = false, rowId }) => {
 		)
 	);
 
-	return <tr>{rowContent}</tr>;
+	return (
+		<tr className={className} onClick={onClick}>
+			{rowContent}
+		</tr>
+	);
 };
 
 export default Row;
