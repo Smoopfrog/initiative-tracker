@@ -13,7 +13,6 @@ const InitiativeTracker: React.FC = () => {
 		characters[0]?.id || ""
 	);
 
-	console.log(characters);
 	const sortedCharacters = useMemo(
 		() => characters.sort((a, b) => a.initiative - b.initiative),
 		[characters]
