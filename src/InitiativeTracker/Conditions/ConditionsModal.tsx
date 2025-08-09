@@ -97,6 +97,7 @@ const ConditionsModal: React.FC<ConditionsModalProps> = ({
 											type="checkbox"
 											checked={localSelectedConditions.includes(condition.name)}
 											onChange={() => handleConditionToggle(condition.name)}
+											onClick={() => handleConditionToggle(condition.name)}
 										/>
 									</div>
 									<div className="condition-info">
