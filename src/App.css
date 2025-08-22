@@ -307,8 +307,8 @@
 }
 
 .condition-badge {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
+	background: "white";
+	color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	padding: 0.25rem 0.5rem;
 	border-radius: 12px;
 	font-size: 0.75rem;
