@@ -5,6 +5,7 @@ import { initialCharacters } from "../Constants/DemoChars";
 import type { ICharacter } from "../Types/Character";
 
 const InitiativeTracker: React.FC = () => {
+	const STORAGE_KEY = "initiativeTracker:characters";
 	const [characters, setCharacters] = useState<ICharacter[]>(
 		initialCharacters || []
 	);
