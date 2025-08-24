@@ -26,6 +26,14 @@ const InitiativeTracker: React.FC = () => {
   }
 }, []);
 
+  useEffect(() => {
+		try {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(characters));
+		} catch {
+			// If for whatever reason the browser has local storage disabled, or there is some other issue, this should prevent a crash JEFF PLEASE CHECK
+		}
+	})
+
 	const sortedCharacters = useMemo(
 		() => characters.sort((a, b) => b.initiative - a.initiative),
 		[characters]
