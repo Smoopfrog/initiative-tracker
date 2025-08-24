@@ -18,6 +18,7 @@ const InitiativeTracker: React.FC = () => {
 		[characters]
 	);
 
+	console.log("hello");
 	return (
 		<div>
 			<InitiativeTrackerMenu
