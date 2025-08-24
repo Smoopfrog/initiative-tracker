@@ -14,6 +14,18 @@ const InitiativeTracker: React.FC = () => {
 		characters[0]?.id || ""
 	);
 
+	useEffect(() => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) setCharacters(parsed);
+    }
+  } catch {
+		// I think this will stop the app from crashing if storage is unavailable? JEFF PLEASE CHECK
+  }
+}, []);
+
 	const sortedCharacters = useMemo(
 		() => characters.sort((a, b) => b.initiative - a.initiative),
 		[characters]
