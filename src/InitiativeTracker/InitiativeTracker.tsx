@@ -32,7 +32,7 @@ const InitiativeTracker: React.FC = () => {
 		} catch {
 			// If for whatever reason the browser has local storage disabled, or there is some other issue, this should prevent a crash JEFF PLEASE CHECK
 		}
-	})
+	}, [characters]);
 
 	const sortedCharacters = useMemo(
 		() => characters.sort((a, b) => b.initiative - a.initiative),
