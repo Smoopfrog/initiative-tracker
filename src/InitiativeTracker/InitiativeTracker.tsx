@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import InitiativeTrackerTable from "./Table/InitiativeTrackerTable";
 import InitiativeTrackerMenu from "./InitiativeTrackerMenu";
 import { initialCharacters } from "../Constants/DemoChars";
