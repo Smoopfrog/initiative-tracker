@@ -52,6 +52,7 @@ const InitiativeTrackerMenu: React.FC<IInitiativeTrackerMenuProps> = ({
 				name: "",
 				ac: 10,
 				hp: 10,
+				maxHp: 10,
 			},
 		]);
 	};

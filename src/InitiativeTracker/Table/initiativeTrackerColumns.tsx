@@ -8,24 +8,28 @@ export const initiativeTrackerColumns: IColumn<ICharacter>[] = [
 		headerName: "Initiave",
 		isEditable: true,
 		value: null,
+		data: null,
 	},
 	{
 		name: "name",
 		headerName: "Name",
 		isEditable: true,
 		value: null,
+		data: null,
 	},
 	{
 		name: "hp",
 		headerName: "HP",
 		isEditable: true,
 		value: null,
+		data: null,
 	},
 	{
 		name: "ac",
 		headerName: "AC",
 		isEditable: true,
 		value: null,
+		data: null,
 	},
 	{
 		name: "conditions",
@@ -33,10 +37,12 @@ export const initiativeTrackerColumns: IColumn<ICharacter>[] = [
 		isEditable: false,
 		value: null,
 		columnRenderer: ConditionsRenderer,
+		data: null,
 	},
 	{
 		name: "delete",
 		headerName: "Delete",
 		value: null,
+		data: null,
 	},
 ];
