@@ -11,13 +11,14 @@ const ConditionsRenderer: React.FC<{
 	isEditable?: boolean;
 	onConditionsUpdate?: (rowId: string, conditions: string[]) => void;
 }> = ({ value, rowId, onConditionsUpdate }) => {
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	// Convert value to array of conditions and filter to only strings
 	const conditions = Array.isArray(value)
 		? (value.filter((v) => typeof v === "string") as string[])
 		: value && typeof value === "string"
 		? [value]
 		: [];
-	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleConditionsChange = (newConditions: string[]) => {
 		if (onConditionsUpdate) {

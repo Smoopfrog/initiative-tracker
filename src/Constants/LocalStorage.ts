@@ -1,0 +1,1 @@
+export const CHARACTERS_LOCAL_STORAGE_KEY = "characters";
