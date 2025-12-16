@@ -12,6 +12,7 @@ const DefaultColumn = <T extends { id: string }>({
 	value,
 	isEditable = false,
 	setData,
+	style,
 }: IDefaultColumnProps<T>) => {
 	const [inputValue, setInputValue] = useState(value);
 
@@ -38,9 +39,12 @@ const DefaultColumn = <T extends { id: string }>({
 					e.currentTarget.blur();
 				}
 			}}
+			style={style}
 		/>
 	) : (
-		<span className="column-value">{value}</span>
+		<span className="column-value" style={style}>
+			{value}
+		</span>
 	);
 };
 

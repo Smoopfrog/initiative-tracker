@@ -3,6 +3,7 @@ export interface ICharacter {
     initiative: number;
     name: string;
     hp: number;
+    maxHp: number;
     ac: number;
     conditions?: string[];
 }

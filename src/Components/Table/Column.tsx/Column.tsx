@@ -2,6 +2,7 @@ import React, { type Dispatch } from "react";
 import DefaultColumn from "./DefaultColumn";
 
 export interface IColumn<T extends { id: string }> {
+	data: T | null;
 	/** Column name */
 	name: string;
 	/** Column header name */
@@ -12,6 +13,8 @@ export interface IColumn<T extends { id: string }> {
 	value: string | number | string[] | number[] | null;
 	/** Custom column renderer component */
 	columnRenderer?: React.ComponentType<IColumnProps<T>>;
+	/** Column style */
+	style?: React.CSSProperties;
 }
 
 export interface IColumnProps<T extends { id: string }> extends IColumn<T> {

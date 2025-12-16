@@ -6,6 +6,7 @@ import DeleteCellRenderer from "../DeleteCellRenderer";
 import type { IRow } from "../../Components/Table/Row/Row";
 import type { ICharacter } from "../../Types/Character";
 import type { IColumnProps } from "../../Components/Table/Column.tsx/Column";
+import HPRenderer from "../HP/HPRenderer";
 
 interface IInitiativeTrackerTableProps {
 	/** Initial characters to display in the table */
@@ -50,8 +51,16 @@ const InitiativeTrackerTable: React.FC<IInitiativeTrackerTableProps> = ({
 				columns: initiativeTrackerColumns.map((column) => {
 					const columnConfig = {
 						...column,
+						data: character,
 						value: character[column.name as keyof ICharacter] || null,
 					};
+
+					// Pass the update function to the hp column
+					if (column.name === "hp") {
+						columnConfig.columnRenderer = (props: IColumnProps<ICharacter>) => (
+							<HPRenderer {...props} data={character} />
+						);
+					}
 
 					// Pass the update function to the conditions column
 					if (column.name === "conditions") {
